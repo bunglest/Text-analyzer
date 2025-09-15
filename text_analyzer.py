@@ -32,14 +32,14 @@ def analyze_text(file_path):
         if len(word_element) > 3:
             long_words.append(word_element)
             
-    print("The total number of words is: " + str(len(my_list)))
-    print("The unique words count is: " + str(len(word_count_dict)))
-    print("The most frequent words are:")
-    
-    for word, count in sorted(word_count_dict.items(), key=lambda item: item[1], reverse=True)[:5]:
-        print(f"'{word}': {count}")
-    
-    print("Long words (more than 3 characters): " + str(len(long_words)))
+    print(f"Total words: {len(words)}")
+    print(f"Unique words: {len(freqs)}")
+    print("Top words:")
+
+        for word, count in freqs.most_common(5):
+            
+            print(f"  '{word}': {count}")
+            print(f"Long words (more than 3 characters): {len(long_words)}")
     
     the_file.close()
 
