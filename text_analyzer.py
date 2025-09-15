@@ -1,11 +1,20 @@
-# unpythonic_analyzer.py
+from collections import Counter
 
 def analyze_text(file_path):
-    """..."""
     with open(file_path, "r", encoding="utf-8") as f:
-        the_text_content = f.read()
-    words = the_text_content.lower().split()
-    ...
+        text = f.read()
+    words = text.lower().split()
+    freqs = Counter(words)  # replaces word_count_dict
+    long_words = []
+    for w in words:
+        if len(w) > 3:
+            long_words.append(w)
+    print(f"Total words: {len(words)}")
+    print(f"Unique words: {len(freqs)}")
+    print("Top words:")
+    for word, count in freqs.most_common(5):
+        print(f"'{word}': {count}")
+    print(f"Long words (more than 3 characters): {len(long_words)}")
 
     
     # Let's count the occurrences of each word.
