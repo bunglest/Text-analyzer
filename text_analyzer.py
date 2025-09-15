@@ -1,11 +1,12 @@
 # unpythonic_analyzer.py
 
-def analyze_text(file_name):
-    # This function is full of bad practices.
-    the_file = open(file_name, 'r')
-    the_text_content = the_file.read()
-    
-    my_list = the_text_content.lower().split()
+def analyze_text(file_path):
+    """..."""
+    with open(file_path, "r", encoding="utf-8") as f:
+        the_text_content = f.read()
+    words = the_text_content.lower().split()
+    ...
+
     
     # Let's count the occurrences of each word.
     word_count_dict = {}
