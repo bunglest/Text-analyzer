@@ -5,7 +5,7 @@ def analyze_text(file_path):
         text = f.read()
     words = text.lower().split()
     freqs = Counter(words)  # replaces word_count_dict
-    long_words = []
+    long_words = [w for w in words if len(w) > 3]
     for w in words:
         if len(w) > 3:
             long_words.append(w)
