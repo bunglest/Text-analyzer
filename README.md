@@ -1,15 +1,17 @@
 # Pythonic Text Analyzer
 
 ## Overview
-This project refactors a provided unpythonic script (`unpythonic_analyzer.py`) into a clean, modular, and Pythonic program (`text_analyzer.py`).  
-The analyzer reads a text file and reports:
+The purpose of this project is to take an unpythonic, poorly written script (`unpythonic_analyzer.py`) and refactor it into a clean, efficient, and Pythonic program (`text_analyzer.py`).  
+The analyzer processes a text file and reports:
 - Total number of words  
 - Number of unique words  
 - The top **N** most frequent words  
 - The number of "long" words (greater than a given length, default 3)  
 
+This demonstrates applying best practices, including PEP 8, idiomatic Python features, and modular design.
+
 ## How to Run
-Make sure you have Python 3 installed. From the repository root:
+Make sure you have Python 3 installed. From the repository root, run:
 
 ```bash
 # Default run (analyzes sample.txt, shows top 5 words, long words >= 4 chars)
@@ -24,65 +26,35 @@ python text_analyzer.py sample.txt --top 10 --min-length 6
 
 By default, if no file path is provided, the program will attempt to analyze sample.txt.
 
-Refactoring Highlights
+Key Improvements in Refactoring
 
 The starter code (unpythonic_analyzer.py) was intentionally full of bad practices.
-The refactored solution (text_analyzer.py) addresses these issues by:
+The refactored version (text_analyzer.py) introduces the following improvements:
 
-✅ PEP 8 Compliance
+PEP 8 Compliance
 
-Snake_case naming for all variables and functions
+Renamed variables and functions to snake_case.
 
-Proper indentation and spacing
+Added clear docstrings and comments.
 
-Descriptive docstrings and inline comments
+Proper spacing and indentation applied consistently.
 
-✅ Idiomatic Python Features
+Context Manager for File Handling
 
-Context manager (with open(...)) for safe file handling
+Replaced manual open() and close() calls with a with open(...) block to ensure safe and automatic file closure.
 
-List comprehension to build the long_words list
+List Comprehension
 
-collections.Counter to efficiently count word frequencies
+Replaced the inefficient loop that appended to long_words with a concise one-line list comprehension.
 
-✅ Improved Structure & Modularity
+collections.Counter
 
-Functions split into small, reusable helpers (read_text, tokenize_words, count_words, find_long_words, top_n_words)
+Used Counter to simplify and speed up word frequency counting, replacing the verbose manual dictionary loop.
 
-analyze_text orchestrates the workflow
+Modularity & Reusability
 
-if __name__ == "__main__": guard with a main() function for clean CLI use
+Split the code into small helper functions (read_text, tokenize_words, count_words, find_long_words, top_n_words).
 
-✅ Readable Output
+Added a main() function and if __name__ == "__main__": guard for reuse and clean structure.
 
-All print statements use f-strings
-
-Results are clearly formatted for the user
-
-Repository Contents
-
-unpythonic_analyzer.py – the original starter file (unrefactored)
-
-text_analyzer.py – the refactored and Pythonic solution
-
-sample.txt – a simple test file
-
-README.md – this documentation
-
-Screencast
-
-You will need to record a 3–5 minute video walkthrough for submission. Include the link here:
-
-🎥 Screencast Link: [PLACEHOLDER – paste Loom or YouTube link here]
-
-Checklist for the screencast:
-
-Run the program from the terminal to demonstrate correct functionality.
-
-Show the use of the context manager in the code.
-
-Point out the list comprehension for long words.
-
-Explain the benefits of Counter over a manual dictionary loop.
-
-Highlight how the code follows PEP 8 and is broken into modular functions.
+These changes improve readability, efficiency, and maintainability while preserving the original script’s functionality.
