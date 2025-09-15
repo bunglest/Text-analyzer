@@ -1,47 +1,40 @@
 from collections import Counter
+from pathlib import Path
 
-def analyze_text(file_path):
-    with open(file_path, "r", encoding="utf-8") as f:
-        text = f.read()
-    words = text.lower().split()
-    freqs = Counter(words)  # replaces word_count_dict
-    long_words = [w for w in words if len(w) > 3]
-    for w in words:
-        if len(w) > 3:
-            long_words.append(w)
+def read_text(path: Path) -> str:
+    """Read and return full file contents (UTF-8)."""
+    with path.open("r", encoding="utf-8") as f:
+        return f.read()
+
+def tokenize_words(text: str):
+    """Return lowercase words split on whitespace."""
+    return text.lower().split()
+
+def count_words(words):
+    """Count word frequencies using Counter."""
+    return Counter(words)
+
+def find_long_words(words, min_length=4):
+    """Return words of length >= min_length."""
+    return [w for w in words if len(w) >= min_length]
+
+def top_n_words(freqs, n=5):
+    """Return top n most frequent words."""
+    return freqs.most_common(n)
+
+def analyze_text(path: Path, *, top=5, min_length=4):
+    """Run full text analysis and print results."""
+    text = read_text(path)
+    words = tokenize_words(text)
+    freqs = count_words(words)
+    long_words = find_long_words(words, min_length)
+
     print(f"Total words: {len(words)}")
     print(f"Unique words: {len(freqs)}")
     print("Top words:")
-    for word, count in freqs.most_common(5):
-        print(f"'{word}': {count}")
-    print(f"Long words (more than 3 characters): {len(long_words)}")
+    for word, count in top_n_words(freqs, top):
+        print(f"  '{word}': {count}")
+    print(f"Long words (length ≥ {min_length}): {len(long_words)}")
 
-    
-    # Let's count the occurrences of each word.
-    word_count_dict = {}
-    
-    for word_item in my_list:
-        if word_item in word_count_dict:
-            word_count_dict[word_item] = word_count_dict[word_item] + 1
-        else:
-            word_count_dict[word_item] = 1
-    
-    # Now let's find the words with more than 3 characters.
-    long_words = []
-    for word_element in my_list:
-        if len(word_element) > 3:
-            long_words.append(word_element)
-            
-    print(f"Total words: {len(words)}")
-    print(f"Unique words: {len(freqs)}")
-    print("Top words:")
-
-        for word, count in freqs.most_common(5):
-            
-            print(f"  '{word}': {count}")
-            print(f"Long words (more than 3 characters): {len(long_words)}")
-    
-    the_file.close()
-
-# You will need to create a text file named 'sample.txt' for testing.
-analyze_text("sample.txt")
+if __name__ == "__main__":
+    analyze_text(Path("sample.txt"))
